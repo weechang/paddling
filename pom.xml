@@ -4,11 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>xyz.weechang</groupId>
-    <artifactId>thin</artifactId>
+    <artifactId>paddling</artifactId>
     <version>1.0.0</version>
 
     <modules>
 
+        <module>paddling-core</module>
+        <module>paddling-admin</module>
+        <module>paddling-demo</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -58,7 +61,7 @@
             <!--mybatis-plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
         </dependencies>
