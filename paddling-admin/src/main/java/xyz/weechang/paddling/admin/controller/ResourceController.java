@@ -66,4 +66,8 @@ public class ResourceController extends PaddlingController {
         resourceService.removeById(id);
         return R.ok();
     }
+
+    public R save(Resource resource){
+        return null;
+    }
 }

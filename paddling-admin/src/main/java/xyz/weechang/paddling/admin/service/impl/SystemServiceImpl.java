@@ -13,4 +13,12 @@ import xyz.weechang.paddling.admin.service.ISystemService;
  */
 @Service
 public class SystemServiceImpl extends ServiceImpl<SystemMapper, System> implements ISystemService {
+
+    @Override
+    public boolean saveOrUpdate(System system) {
+        if (system.getId() == null) {
+
+        }
+        return super.saveOrUpdate(system);
+    }
 }

@@ -63,4 +63,14 @@ public class SystemController extends PaddlingController {
         systemService.removeById(id);
         return R.ok();
     }
+
+    /**
+     * 保存系统
+     * @param system 系统
+     * @return 系统
+     */
+    @PostMapping
+    public R save(@RequestBody System system){
+        return null;
+    }
 }

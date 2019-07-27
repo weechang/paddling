@@ -1,13 +1,8 @@
-package xyz.weechang.paddling.core.security;
+package xyz.weechang.paddling.admin.service;
 
-/**
- * 安全service
- *
- * @author zhangwei
- * date 2019/2/12
- * time 11:30
- */
-public interface PaddlingSecurityService {
+import xyz.weechang.paddling.core.security.PaddlingSecurityUser;
+
+public interface IPaddlingSecurityService {
 
     /**
      * 根据用户名，判断该URL是否有访问权限
