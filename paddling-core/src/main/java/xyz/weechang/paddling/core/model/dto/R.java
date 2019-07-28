@@ -24,7 +24,7 @@ public class R<T> {
     /*** 响应消息 */
     private String msg = "success";
     /*** 结果 */
-    private T result;
+    private T data;
 
     public R() {
     }
@@ -52,7 +52,7 @@ public class R<T> {
     public static R ok(Object t) {
         R r = new R();
         r.success = true;
-        r.result = t;
+        r.data = t;
         return r;
     }
 
