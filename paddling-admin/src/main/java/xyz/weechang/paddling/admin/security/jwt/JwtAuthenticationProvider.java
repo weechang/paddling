@@ -53,7 +53,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         } else {
             String encodePwd = SecureUtil.sha256(SecureUtil.sha256(username) + SecureUtil.sha256(password));
             UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
-            if (!userDetails.getPassword().equals(encodePwd)) {
+            if (!encodePwd.equals(userDetails.getPassword())) {
                 throw new BadCredentialsException("用户名密码不正确，请重新登陆！");
             }
             String token = jwtUserDetailsService.loginSuccess(userDetails);

@@ -88,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 /***RBAC权限*/
                 .anyRequest()
-                .access("@morecoAuthorityservice.hasPermission(request,authentication)")
+                .access("@paddlingAuthorityService.hasPermission(request,authentication)")
 
                 /***跨域*/
                 .and()

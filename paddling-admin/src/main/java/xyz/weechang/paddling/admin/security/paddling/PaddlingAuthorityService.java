@@ -19,7 +19,7 @@ import java.util.Set;
  * time 16:39
  */
 @Slf4j
-@Component
+@Component("paddlingAuthorityService")
 public class PaddlingAuthorityService {
 
     @Autowired
