@@ -3,9 +3,6 @@ spring:
     name: paddling-admin-demo
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.244.204.9:3306/paddling?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: x2(9XN-wKGq~%T3H
-#    url: jdbc:mysql://127.0.0.2:3306/moreco?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#    username: moreco
-#    password: moreco
+    url: jdbc:mysql://127.0.0.1:3306/moreco?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: moreco
+    password: moreco
