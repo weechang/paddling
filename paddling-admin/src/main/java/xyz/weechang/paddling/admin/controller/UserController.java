@@ -9,6 +9,7 @@ import xyz.weechang.paddling.admin.model.domain.User;
 import xyz.weechang.paddling.admin.service.IUserService;
 import xyz.weechang.paddling.core.controller.PaddlingController;
 import xyz.weechang.paddling.core.model.dto.R;
+import xyz.weechang.paddling.core.security.PaddlingSecurityUtil;
 
 import java.util.List;
 
@@ -93,4 +94,14 @@ public class UserController extends PaddlingController {
         return R.ok();
     }
 
+    /**
+     * 获取当前用户信息
+     * @return 当前用户信息
+     */
+    @GetMapping("current")
+    public R current() {
+        Long userId = PaddlingSecurityUtil.getUserId();
+        User user = userService.getById(userId);
+        return R.ok();
+    }
 }

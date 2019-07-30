@@ -36,8 +36,8 @@ public class JwtAuthenticationRefreshFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         String reqUri = req.getRequestURI();
         String authHeader = req.getHeader(PaddlingAdminProperties.authKey);
-        if (authHeader != null && authHeader.startsWith("Bearer ") && !reqUri.equals("/login")) {
-            final String authToken = authHeader.substring("Bearer ".length());
+        if (authHeader != null && authHeader.startsWith(PaddlingAdminProperties.authBearKey) && !reqUri.equals("/login")) {
+            final String authToken = authHeader.substring(PaddlingAdminProperties.authBearKey.length());
             try {
                 DecodedJWT decodedJWT = JWT.decode(authToken);
                 String username = decodedJWT.getSubject();

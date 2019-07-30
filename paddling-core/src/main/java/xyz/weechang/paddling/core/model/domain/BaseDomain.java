@@ -24,13 +24,13 @@ public class BaseDomain implements Serializable {
     protected Date createdDate;
 
     /*** 创建人 */
-    protected String createdBy;
+    protected Long createdBy;
 
     /*** 更新时间 */
     protected Date modifiedDate;
 
     /*** 更新人 */
-    protected String modifiedBy;
+    protected Long modifiedBy;
 
     /*** 逻辑删除 */
     @TableLogic

@@ -31,7 +31,7 @@ public class PaddlingAdminProperties {
     public static final String authKey = "Authorization";
 
     /***授权Bearer key*/
-    public static final String authBearKey = "Bearer";
+    public static final String authBearKey = "Bearer ";
 
     /***不需要授权的路径*/
     private List<String> noAuthPaths;

@@ -12,6 +12,7 @@
         <module>paddling-core</module>
         <module>paddling-admin</module>
         <module>paddling-demo</module>
+        <module>paddling-oss</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -28,7 +29,21 @@
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
         <hutool.version>4.4.2</hutool.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <druid.version>1.1.18</druid.version>
     </properties>
+
+    <dependencies>
+        <!--others-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -50,19 +65,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!--others-->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
             <!--mybatis-plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
             </dependency>
         </dependencies>
     </dependencyManagement>

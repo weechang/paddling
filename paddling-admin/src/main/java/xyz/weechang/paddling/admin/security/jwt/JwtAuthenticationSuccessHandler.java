@@ -39,7 +39,7 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
         PrintWriter writer = null;
         try {
             Map<String, String> result = new HashMap<>();
-            result.put("token", token);
+            result.put("jwt_token", PaddlingAdminProperties.authBearKey + token);
             R r = R.ok(result);
             writer = res.getWriter();
             writer.write(JSONUtil.toJsonStr(r));
