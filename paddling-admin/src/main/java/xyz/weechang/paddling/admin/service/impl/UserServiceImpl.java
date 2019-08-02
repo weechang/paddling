@@ -3,6 +3,7 @@ package xyz.weechang.paddling.admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import xyz.weechang.paddling.admin.config.PaddlingAdminProperties;
 import xyz.weechang.paddling.admin.error.PaddlingAdminError;
 import xyz.weechang.paddling.admin.mapper.UserMapper;
 import xyz.weechang.paddling.admin.model.domain.User;
@@ -27,17 +28,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void createUser(User user) {
+    public boolean saveOrUpdate(User user) {
         String username = user.getUsername();
         User saved = getOneByUsername(username);
-        if (saved != null) {
-            throw new AppException(PaddlingAdminError.USER_EXISTED);
-        }
-        super.save(user);
+        if (saved != null && !saved.getId().equals(user.getId())) throw new AppException(PaddlingAdminError.USER_EXISTED);
+        return super.saveOrUpdate(user);
     }
 
     @Override
     public void bindRole(Long userId, List<Long> roleIdList) {
+
+    }
+
+    @Override
+    public void restPwd(Long userId) {
+        String password = PaddlingAdminProperties.USER_PASSWORD;
 
     }
 }

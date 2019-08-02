@@ -34,4 +34,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         JSONObject resourceIdJson = JSONUtil.parseObj(resourceIdList);
 
     }
+
+    @Override
+    public boolean saveOrUpdate(Role role) {
+        return super.saveOrUpdate(role);
+    }
 }

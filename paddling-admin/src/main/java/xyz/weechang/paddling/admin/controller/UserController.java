@@ -1,11 +1,14 @@
 package xyz.weechang.paddling.admin.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.weechang.paddling.admin.model.domain.User;
+import xyz.weechang.paddling.admin.model.domain.enums.UserStatusEnum;
 import xyz.weechang.paddling.admin.service.IUserService;
 import xyz.weechang.paddling.core.controller.PaddlingController;
 import xyz.weechang.paddling.core.model.dto.R;
@@ -21,20 +24,20 @@ import java.util.List;
  * time 14:16
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/paddling/admin/user")
 public class UserController extends PaddlingController {
 
     @Autowired
     private IUserService userService;
 
-    /**
-     * 分页查询用户信息
-     *
-     * @param pageParam 分页参数
-     * @param user      查询参数
-     * @return 分页结果
-     */
-    @GetMapping("page")
+    @GetMapping("/toPage")
+    public R toPage() {
+        JSONObject result = new JSONObject();
+        result.put("userStatuses", UserStatusEnum.toJsonArray());
+        return R.ok(result);
+    }
+
+    @GetMapping
     public R page(Page<User> pageParam, User user) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         if (user != null) {
@@ -45,63 +48,60 @@ public class UserController extends PaddlingController {
             queryWrapper.like(user.getUserStatus() != null, User::getUserStatus, user.getUserStatus());
         }
         IPage<User> page = userService.page(pageParam, queryWrapper);
+        this.convert(page);
         return R.ok(page);
     }
 
-    /**
-     * 获取用户详情
-     *
-     * @param id 用户id
-     * @return 用户详情
-     */
-    @GetMapping("detail/{id}")
+    @GetMapping("/{id}")
     public R detail(@PathVariable("id") Long id) {
         User user = userService.getById(id);
         return R.ok(user);
     }
 
-    /**
-     * 删除用户
-     * @param id 用户ID
-     * @return 删除结果
-     */
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public R delete(@PathVariable("id") Long id) {
         userService.removeById(id);
         return R.ok();
     }
 
-    /**
-     * 创建用户
-     * @param username 用户名
-     * @return 创建结果
-     */
-    @PostMapping("createUser")
-    public R createUser(String username) {
-        User user = new User();
-        user.setUsername(username);
-        userService.createUser(user);
+    @PostMapping
+    public R saveOrUpdate(User user) {
+        if (user.getId() == null) {
+            user.setUserStatus(UserStatusEnum.AVAILABLE);
+        }
+        userService.saveOrUpdate(user);
         return R.ok();
     }
 
-    /**
-     * 绑定角色
-     * @return 绑定结果
-     */
-    @PostMapping("bindRole")
+    @PostMapping("/bindRole")
     public R bindRole(Long userId, List<Long> roleIdList) {
         userService.bindRole(userId, roleIdList);
         return R.ok();
     }
 
-    /**
-     * 获取当前用户信息
-     * @return 当前用户信息
-     */
-    @GetMapping("current")
+    @PostMapping("/resetPwd/{userId}")
+    public R resetPwd(@PathVariable("userId") Long userId) {
+        userService.restPwd(userId);
+        return R.ok();
+    }
+
+    @GetMapping("/current")
     public R current() {
         Long userId = PaddlingSecurityUtil.getUserId();
         User user = userService.getById(userId);
         return R.ok();
+    }
+
+    private void convert(User user) {
+        user.addExtData("userStatus", UserStatusEnum.getDesc(user.getUserStatus()));
+    }
+
+    private void convert(IPage<User> page) {
+        if (page == null) return;
+        List<User> users = page.getRecords();
+        if (CollectionUtil.isEmpty(users)) return;
+        for (User user : users) {
+            convert(user);
+        }
     }
 }

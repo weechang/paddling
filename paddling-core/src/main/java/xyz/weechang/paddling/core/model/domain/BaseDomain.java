@@ -21,13 +21,13 @@ public class BaseDomain implements Serializable {
     private static final long serialVersionUID = 5966306766659220492L;
 
     /*** 创建时间 */
-    protected Date createdDate;
+    protected Date createdTime;
 
     /*** 创建人 */
     protected Long createdBy;
 
     /*** 更新时间 */
-    protected Date modifiedDate;
+    protected Date modifiedTime;
 
     /*** 更新人 */
     protected Long modifiedBy;
@@ -38,10 +38,9 @@ public class BaseDomain implements Serializable {
 
     /*** 扩展参数 */
     @TableField(exist = false)
-    protected Map<String, Object> extData;
+    protected Map<String, Object> extData = new HashMap<>();
 
     public void addExtData(String key, Object value){
-        if (extData == null) new HashMap<>();
         extData.put(key, value);
     }
 }

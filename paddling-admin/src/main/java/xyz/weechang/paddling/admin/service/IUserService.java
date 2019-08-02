@@ -14,7 +14,7 @@ public interface IUserService extends IService<User> {
 
     User getOneByUsername(String username);
 
-    void createUser(User user);
-
     void bindRole(Long userId, List<Long> roleIdList);
+
+    void restPwd(Long userId);
 }

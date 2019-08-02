@@ -3,6 +3,7 @@ package xyz.weechang.paddling.core.config;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import xyz.weechang.paddling.core.interceptor.SQLAuditInterceptor;
 
 /**
  * @author zhangwei
@@ -17,5 +18,12 @@ public class PaddlingCoreAutoConfiguration {
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         return paginationInterceptor;
+    }
+
+    /*** mybatis SQL审计插件 */
+    @Bean
+    public SQLAuditInterceptor sqlAuditInterceptor() {
+        SQLAuditInterceptor sqlAuditInterceptor = new SQLAuditInterceptor();
+        return sqlAuditInterceptor;
     }
 }

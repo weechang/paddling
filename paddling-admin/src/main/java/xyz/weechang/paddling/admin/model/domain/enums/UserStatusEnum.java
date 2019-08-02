@@ -1,8 +1,7 @@
 package xyz.weechang.paddling.admin.model.domain.enums;
 
 import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import com.baomidou.mybatisplus.annotation.EnumValue;
+import xyz.weechang.paddling.core.model.domain.enums.IPaddlingEnum;
 
 /**
  * 用户状态
@@ -11,53 +10,40 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
  * date 2018/10/30
  * time 20:04
  */
-public enum UserStatusEnum {
+public enum UserStatusEnum implements IPaddlingEnum<Integer, String> {
+
     FORBIDDEN(0, "禁用"),
     AVAILABLE(1, "可用"),
     LOCKED(2, "锁定");
 
-    @EnumValue
-    private Integer key;
-    private String name;
+    private int value;
+    private String desc;
 
-    public Integer getKey() {
-        return key;
-    }
-
-    public void setKey(Integer key) {
-        this.key = key;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    UserStatusEnum(Integer key, String name) {
-        this.key = key;
-        this.name = name;
-    }
-
-    public static String getNameByKey(Integer key) {
-        for (UserStatusEnum item : values()) {
-            if (item.key == key) {
-                return item.name;
-            }
-        }
-        return null;
+    UserStatusEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
     }
 
     public static JSONArray toJsonArray() {
         JSONArray array = new JSONArray();
         for (UserStatusEnum e : values()) {
-            JSONObject item = new JSONObject();
-            item.put("key", e.getKey());
-            item.put("name", e.getName());
-            array.add(item);
+            array.add(e.toJson());
         }
         return array;
+    }
+
+    public static String getDesc(UserStatusEnum e) {
+        if (e == null) return null;
+        return e.desc;
+    }
+
+    @Override
+    public String getDesc() {
+        return this.desc;
+    }
+
+    @Override
+    public Integer getValue() {
+        return this.value;
     }
 }

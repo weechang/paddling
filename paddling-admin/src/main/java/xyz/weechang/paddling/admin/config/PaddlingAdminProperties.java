@@ -33,6 +33,9 @@ public class PaddlingAdminProperties {
     /***授权Bearer key*/
     public static final String authBearKey = "Bearer ";
 
+    /*** 默认密码 */
+    public static final String USER_PASSWORD = "Aa123456";
+
     /***不需要授权的路径*/
     private List<String> noAuthPaths;
 

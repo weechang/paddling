@@ -11,7 +11,7 @@ import xyz.weechang.paddling.core.error.IError;
  */
 public enum PaddlingAdminError implements IError {
     USER_EXISTED(1001, "用户已存在"),
-    MENU_EXISTED(1002, "目录已存在"),
+    RESOURCE_EXISTED(1002, "资源已存在"),
     ROLE_EXISTED(1003, "角色已存在"),
     ROLE_NOT_EXISTED(1004, "角色不存在"),
     ACCESS_FORBIDDEN(2001, "权限不足"),

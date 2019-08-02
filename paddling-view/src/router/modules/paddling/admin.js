@@ -13,12 +13,6 @@ const paddlingAdminRouter = {
   },
   children: [
     {
-      path: 'system',
-      component: () => import('@/views/paddling/admin/system'),
-      name: '系统管理',
-      meta: { title: '系统管理', noCache: true }
-    },
-    {
       path: 'resources',
       component: () => import('@/views/paddling/admin/resource'),
       name: '资源管理',

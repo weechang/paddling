@@ -34,12 +34,12 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
         res.setCharacterEncoding("UTF-8");
         res.setContentType("application/json; charset=utf-8");
         DecodedJWT jwt = ((JwtAuthenticationToken) auth).getToken();
-        String token = jwt.getToken();
+        String token = PaddlingAdminProperties.authBearKey + jwt.getToken();
         res.setHeader(PaddlingAdminProperties.authKey, token);
         PrintWriter writer = null;
         try {
             Map<String, String> result = new HashMap<>();
-            result.put("jwt_token", PaddlingAdminProperties.authBearKey + token);
+            result.put("jwt_token", token);
             R r = R.ok(result);
             writer = res.getWriter();
             writer.write(JSONUtil.toJsonStr(r));

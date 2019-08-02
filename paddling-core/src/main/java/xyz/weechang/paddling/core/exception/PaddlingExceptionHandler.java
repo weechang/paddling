@@ -43,62 +43,62 @@ public class PaddlingExceptionHandler {
 
     private R build(Throwable ex, HttpServletResponse servletResponse) {
         IError error;
-        String extMessage = null;
+        String msg = null;
         if (!(ex instanceof AppException)) {
             log.error(ex.getMessage());
         }
         if (ex instanceof AppException) {
             error = ((AppException) ex).getError();
-            extMessage = ((AppException) ex).getExtMessage();
+            msg = error.getMsg();
         } else if (ex instanceof BindException) {
             error = SysError.INVALID_PARAMETER;
             List<ObjectError> errors = ((BindException) ex).getAllErrors();
             if (errors != null && errors.size() != 0) {
-                StringBuilder msg = new StringBuilder();
+                StringBuilder msgSb = new StringBuilder();
                 for (ObjectError objectError : errors) {
-                    msg.append("Field error in object '" + objectError.getObjectName() + " ");
+                    msgSb.append("Field error in object '" + objectError.getObjectName() + " ");
                     if (objectError instanceof FieldError) {
-                        msg.append("on field " + ((FieldError) objectError).getField() + " ");
+                        msgSb.append("on field " + ((FieldError) objectError).getField() + " ");
                     }
-                    msg.append(objectError.getDefaultMessage() + " ");
+                    msgSb.append(objectError.getDefaultMessage() + " ");
                 }
-                extMessage = msg.toString();
+                msg = msgSb.toString();
             }
         } else if (ex instanceof MissingServletRequestParameterException) {
             error = SysError.INVALID_PARAMETER;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof ConstraintViolationException) {
             error = SysError.INVALID_PARAMETER;
             Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) ex).getConstraintViolations();
-            final StringBuilder msg = new StringBuilder();
+            final StringBuilder msgSb = new StringBuilder();
             for (ConstraintViolation<?> constraintViolation : violations) {
-                msg.append(constraintViolation.getPropertyPath()).append(":").append(constraintViolation.getMessage() + "\n");
+                msgSb.append(constraintViolation.getPropertyPath()).append(":").append(constraintViolation.getMessage() + "\n");
             }
-            extMessage = msg.toString();
+            msg = msgSb.toString();
         } else if (ex instanceof HttpMediaTypeNotSupportedException) {
             error = SysError.CONTENT_TYPE_NOT_SUPPORT;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof HttpMessageNotReadableException) {
             error = SysError.INVALID_PARAMETER;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof MethodArgumentNotValidException) {
             error = SysError.INVALID_PARAMETER;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof HttpRequestMethodNotSupportedException) {
             error = SysError.METHOD_NOT_SUPPORTED;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof UnexpectedTypeException) {
             error = SysError.INVALID_PARAMETER;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else if (ex instanceof NoHandlerFoundException) {
             error = SysError.SERVICE_NOT_FOUND;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         } else {
             error = SysError.SYSTEM_INTERNAL_ERROR;
-            extMessage = ex.getMessage();
+            msg = ex.getMessage();
         }
         R response = R.error(error);
-        response.setMsg(extMessage);
+        response.setMsg(msg);
         int status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
         if (error == SysError.INVALID_PARAMETER) {
             status = HttpServletResponse.SC_BAD_REQUEST;

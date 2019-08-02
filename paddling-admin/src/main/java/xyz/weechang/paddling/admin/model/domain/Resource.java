@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import xyz.weechang.paddling.admin.model.domain.enums.ResourceStatusEnum;
 import xyz.weechang.paddling.admin.model.domain.enums.ResourceTypeEnum;
 import xyz.weechang.paddling.core.model.domain.BaseDomain;
 
@@ -25,26 +26,29 @@ public class Resource extends BaseDomain {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /*** 系统Id */
-    private Long sysId;
-
     /*** 上级Id */
-    private String parenId;
+    private Long parentId;
 
     /*** 资源名称 */
     private String resourceName;
 
+    /*** 资源编码 */
+    private String resourceCode;
+
     /*** 路径 */
     private String url;
-
-    /*** 资源类型 1:菜单 2:页面组件 3:请求路径 4:外链菜单 */
-    private ResourceTypeEnum resourceType;
 
     /*** 资源图标 */
     private String resourceIcon;
 
+    /*** 资源类型 1:显示菜单 2:隐藏菜单 3:页面组件 4:请求路径 5:外链菜单 */
+    private ResourceTypeEnum resourceType;
+
+    /*** 资源状态 0:禁用 1:启用 */
+    private ResourceStatusEnum resourceStatus;
+
     /*** 排序 */
-    private Integer sortNo;
+    private Integer orderNo;
 
     /*** 备注 */
     private String remark;
