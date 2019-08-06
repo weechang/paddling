@@ -2,6 +2,7 @@ package xyz.weechang.paddling.oss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 七牛云存储
@@ -11,7 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * time 16:01
  */
 @Data
-@ConfigurationProperties(OssProperties.qiniuPreKey)
+@Component
+@ConfigurationProperties(PaddlingOssConstant.qiniuPreKey)
 public class QiniuProperties {
 
     /*** 七牛路径前缀 */

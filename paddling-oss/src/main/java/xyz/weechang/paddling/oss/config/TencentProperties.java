@@ -2,6 +2,7 @@ package xyz.weechang.paddling.oss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 腾讯云存储
@@ -11,7 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * time 16:02
  */
 @Data
-@ConfigurationProperties(OssProperties.tencentPreKey)
+@Component
+@ConfigurationProperties(PaddlingOssConstant.tencentPreKey)
 public class TencentProperties {
 
     /*** 腾讯云路径前缀 */

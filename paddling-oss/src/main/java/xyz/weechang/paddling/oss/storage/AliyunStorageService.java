@@ -1,8 +1,8 @@
 package xyz.weechang.paddling.oss.storage;
 
 import com.aliyun.oss.OSSClient;
+import org.springframework.stereotype.Component;
 import xyz.weechang.paddling.oss.config.AliyunProperties;
-import xyz.weechang.paddling.oss.config.OssProperties;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayInputStream;
@@ -15,6 +15,7 @@ import java.io.InputStream;
  * date 2018/10/27
  * time 14:26
  */
+@Component
 public class AliyunStorageService extends StorageService {
 
     private OSSClient client;
@@ -22,9 +23,9 @@ public class AliyunStorageService extends StorageService {
     @Resource
     private AliyunProperties aliyunProperties;
 
-    public AliyunStorageService(OssProperties config) {
-        this.config = config;
-        this.client = new OSSClient(aliyunProperties.getEndpoint(), aliyunProperties.getAccessKeyId(), aliyunProperties.getAccessKeySecret());
+    @Override
+    public String getUploadToken() {
+        return null;
     }
 
     @Override

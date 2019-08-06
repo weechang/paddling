@@ -1,18 +1,19 @@
 package xyz.weechang.paddling.oss.config;
 
-import lombok.Data;
-import org.springframework.context.annotation.Configuration;
-
 /**
- * OSS config 文件
+ * OSS 常量
  *
  * @author zhangwei
- * date 2018/10/27
- * time 14:23
+ * date 2019/5/23
+ * time 15:59
  */
-@Configuration
-@Data
-public class OssProperties {
+public class PaddlingOssConstant {
+
+    /*** 扫描包 */
+    public static final String componentScan = "xyz.weechang.paddling.oss";
+
+    /*** 全局配置 */
+    public static final String paddlingOss = "paddling.oss";
 
     /*** 本地存储Key */
     public static final String localPreKey = "paddling.oss.local";

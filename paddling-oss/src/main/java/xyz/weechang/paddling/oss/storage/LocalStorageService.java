@@ -1,5 +1,7 @@
 package xyz.weechang.paddling.oss.storage;
 
+import org.springframework.stereotype.Component;
+
 import java.io.InputStream;
 
 /**
@@ -9,7 +11,13 @@ import java.io.InputStream;
  * date 2019/5/23
  * time 13:28
  */
-public class LocalStorageService extends StorageService{
+@Component
+public class LocalStorageService extends StorageService {
+
+    @Override
+    public String getUploadToken() {
+        return null;
+    }
 
     @Override
     public String upload(byte[] data, String path) {

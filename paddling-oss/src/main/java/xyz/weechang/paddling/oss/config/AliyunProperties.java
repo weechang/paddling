@@ -2,6 +2,7 @@ package xyz.weechang.paddling.oss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 阿里云OSS存储对象
@@ -11,7 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * time 16:01
  */
 @Data
-@ConfigurationProperties(OssProperties.aliyunPreKey)
+@Component
+@ConfigurationProperties(PaddlingOssConstant.aliyunPreKey)
 public class AliyunProperties {
 
     /*** Region */

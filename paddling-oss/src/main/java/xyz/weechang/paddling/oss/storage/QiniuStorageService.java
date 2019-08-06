@@ -6,10 +6,11 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import xyz.weechang.paddling.oss.config.OssProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import xyz.weechang.paddling.oss.config.QiniuProperties;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
 import java.io.InputStream;
 
 /**
@@ -19,17 +20,26 @@ import java.io.InputStream;
  * date 2018/10/27
  * time 14:26
  */
+@Component
 public class QiniuStorageService extends StorageService{
 
     private UploadManager uploadManager;
     private String token;
 
-    @Resource
+    @Autowired
     private QiniuProperties qiniuProperties;
 
-    public QiniuStorageService(OssProperties config) {
-        uploadManager = new UploadManager(new Configuration(Zone.autoZone()));
-        token = Auth.create(qiniuProperties.getAccessKey(), qiniuProperties.getSecretKey()).uploadToken(qiniuProperties.getBucketName());
+    @PostConstruct
+    public void beforeInit() {
+        if (qiniuProperties != null) {
+            uploadManager = new UploadManager(new Configuration(Zone.autoZone()));
+            token = Auth.create(qiniuProperties.getAccessKey(), qiniuProperties.getSecretKey()).uploadToken(qiniuProperties.getBucketName());
+        }
+    }
+
+    @Override
+    public String getUploadToken() {
+        return this.token;
     }
 
     @Override

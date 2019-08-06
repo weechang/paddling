@@ -8,3 +8,13 @@ spring:
     password: paddling
 mybatis-plus:
   typeEnumsPackage: xyz.weechang.paddling.admin.model.domain.enums
+
+
+paddling:
+  oss:
+    defaultOss: QINIU
+    qiniu:
+      prefix: test
+      accessKey: test
+      secretKey: test
+      bucketName: test

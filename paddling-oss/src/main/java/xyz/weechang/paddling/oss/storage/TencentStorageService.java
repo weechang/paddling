@@ -7,7 +7,7 @@ import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.request.UploadFileRequest;
 import com.qcloud.cos.sign.Credentials;
-import xyz.weechang.paddling.oss.config.OssProperties;
+import org.springframework.stereotype.Component;
 import xyz.weechang.paddling.oss.config.TencentProperties;
 
 import javax.annotation.Resource;
@@ -19,6 +19,7 @@ import java.io.InputStream;
  * date 2018/10/27
  * time 14:31
  */
+@Component
 public class TencentStorageService extends StorageService{
 
     private COSClient client;
@@ -26,11 +27,9 @@ public class TencentStorageService extends StorageService{
     @Resource
     private TencentProperties tencentProperties;
 
-    public TencentStorageService(OssProperties config) {
-        Credentials credentials = new Credentials(tencentProperties.getAppId(), tencentProperties.getSecretId(), tencentProperties.getSecretKey());
-        ClientConfig clientConfig = new ClientConfig();
-        clientConfig.setRegion(tencentProperties.getRegion());
-        this.client = new COSClient(clientConfig, credentials);
+    @Override
+    public String getUploadToken() {
+        return null;
     }
 
     @Override

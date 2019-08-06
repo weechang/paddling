@@ -18,6 +18,11 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
+            <groupId>xyz.weechang</groupId>
+            <artifactId>paddling-oss</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>

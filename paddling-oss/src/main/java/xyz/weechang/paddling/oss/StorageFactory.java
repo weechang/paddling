@@ -1,8 +1,9 @@
 package xyz.weechang.paddling.oss;
 
-
-import xyz.weechang.paddling.oss.config.OssProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import xyz.weechang.paddling.oss.enums.OSSEnum;
+import xyz.weechang.paddling.oss.storage.*;
 
 /**
  * 存储方案
@@ -11,12 +12,35 @@ import xyz.weechang.paddling.oss.enums.OSSEnum;
  * date 2018/10/27
  * time 14:27
  */
-public abstract class StorageFactory {
+@Component
+public class StorageFactory {
 
-    OssProperties config;
+    @Autowired
+    private LocalStorageService localStorageService;
+    @Autowired
+    private QiniuStorageService qiniuStorageService;
+    @Autowired
+    private AliyunStorageService aliyunStorageService;
+    @Autowired
+    private TencentStorageService tencentStorageService;
 
-    public StorageFactory(OSSEnum type){
-
+    public StorageService getStorage(OSSEnum type) {
+        StorageService storageService = null;
+        switch (type) {
+            case LOCAL:
+                storageService = localStorageService;
+                break;
+            case QINIU:
+                storageService = qiniuStorageService;
+                break;
+            case ALIYUN:
+                storageService = aliyunStorageService;
+                break;
+            case TENCENT:
+                storageService = tencentStorageService;
+                break;
+        }
+        return storageService;
     }
 
 }

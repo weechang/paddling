@@ -3,7 +3,6 @@ package xyz.weechang.paddling.oss.storage;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import org.apache.commons.lang.StringUtils;
-import xyz.weechang.paddling.oss.config.OssProperties;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -17,8 +16,6 @@ import java.util.UUID;
  * time 14:39
  */
 public abstract class StorageService {
-
-    OssProperties config;
 
     /**
      * 文件路径
@@ -37,6 +34,13 @@ public abstract class StorageService {
 
         return path + suffix;
     }
+
+    /**
+     * 获取上传token
+     *
+     * @return 上传token
+     */
+    public abstract String getUploadToken();
 
     /**
      * 文件上传
