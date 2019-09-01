@@ -26,4 +26,7 @@ public class PaddlingOssConstant {
 
     /*** 腾讯云Key */
     public static final String tencentPreKey = "paddling.oss.tencent";
+
+    /*** 上传Token */
+    public static final String uploadTokenKey = "uploadToken";
 }

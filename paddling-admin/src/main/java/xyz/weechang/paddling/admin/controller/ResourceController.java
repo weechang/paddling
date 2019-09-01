@@ -69,7 +69,7 @@ public class ResourceController extends PaddlingController {
     @PostMapping
     public R saveOrUpdate(Resource resource) {
         if (resource.getId() == null) {
-            resource.setResourceStatus(ResourceStatusEnum.AVAILABLE);
+            resource.setResourceStatus(ResourceStatusEnum.AVAILABLE.getValue());
         }
         resourceService.saveOrUpdate(resource);
         return R.ok();

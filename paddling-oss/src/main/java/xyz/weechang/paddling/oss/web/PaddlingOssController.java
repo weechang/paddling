@@ -3,10 +3,12 @@ package xyz.weechang.paddling.oss.web;
 import cn.hutool.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.weechang.paddling.core.model.dto.R;
 import xyz.weechang.paddling.oss.StorageFactory;
+import xyz.weechang.paddling.oss.config.PaddlingOssConstant;
 import xyz.weechang.paddling.oss.config.PaddlingOssProperties;
 import xyz.weechang.paddling.oss.enums.OSSEnum;
 import xyz.weechang.paddling.oss.storage.StorageService;
@@ -37,7 +39,6 @@ public class PaddlingOssController {
         defaultOssType = OSSEnum.buildEnum(defaultOss);
     }
 
-
     @GetMapping("uploadToken")
     public R uploadToken(OSSEnum ossType) {
         if (ossType == null) {
@@ -47,7 +48,12 @@ public class PaddlingOssController {
         if (storageService == null) return R.ok();
         String uploadToken = storageService.getUploadToken();
         JSONObject result = new JSONObject();
-        result.put("uploadToken", uploadToken);
+        result.put(PaddlingOssConstant.uploadTokenKey, uploadToken);
         return R.ok(result);
+    }
+
+    @PostMapping("upload")
+    public R upload() {
+        return R.ok();
     }
 }

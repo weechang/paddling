@@ -6,7 +6,7 @@
         <el-option v-for="item in resourceTypes" :key="item.value" :label="item.desc" :value="item.obj" />
       </el-select>
       <el-select v-model="listQuery.resourceStatus" placeholder="资源状态" clearable class="filter-item" style="width: 150px">
-        <el-option v-for="item in resourceStatuses" :key="item.value" :label="item.desc" :value="item.obj" />
+        <el-option v-for="item in resourceStatuses" :key="item.value" :label="item.desc" :value="item.value" />
       </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查询</el-button>
     </div>

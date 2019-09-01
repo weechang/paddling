@@ -37,6 +37,16 @@ public enum UserStatusEnum implements IPaddlingEnum<Integer, String> {
         return e.desc;
     }
 
+    public static String getDesc(Integer v) {
+        if (v == null) return null;
+        for (UserStatusEnum e : values()) {
+            if (e.value == v) {
+                return e.desc;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String getDesc() {
         return this.desc;

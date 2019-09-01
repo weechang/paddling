@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import xyz.weechang.paddling.admin.model.domain.enums.ResourceStatusEnum;
-import xyz.weechang.paddling.admin.model.domain.enums.ResourceTypeEnum;
 import xyz.weechang.paddling.core.model.domain.BaseDomain;
 
 /**
@@ -42,10 +40,10 @@ public class Resource extends BaseDomain {
     private String resourceIcon;
 
     /*** 资源类型 1:显示菜单 2:隐藏菜单 3:页面组件 4:请求路径 5:外链菜单 */
-    private ResourceTypeEnum resourceType;
+    private Integer resourceType;
 
     /*** 资源状态 0:禁用 1:启用 */
-    private ResourceStatusEnum resourceStatus;
+    private Integer resourceStatus;
 
     /*** 排序 */
     private Integer orderNo;

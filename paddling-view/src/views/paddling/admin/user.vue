@@ -6,7 +6,7 @@
       <el-input v-model="listQuery.email" placeholder="邮箱" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-input v-model="listQuery.mobile" placeholder="手机号" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-select v-model="listQuery.userStatus" placeholder="用户状态" clearable class="filter-item" style="width: 150px">
-        <el-option v-for="item in userStatuses" :key="item.value" :label="item.desc" :value="item.obj" />
+        <el-option v-for="item in userStatuses" :key="item.value" :label="item.desc" :value="item.value" />
       </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查询</el-button>
     </div>

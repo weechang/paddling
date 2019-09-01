@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import xyz.weechang.paddling.admin.model.domain.enums.UserStatusEnum;
 import xyz.weechang.paddling.core.model.domain.BaseDomain;
 
 import java.util.Date;
@@ -57,5 +56,5 @@ public class User extends BaseDomain {
     private Date lockedTime;
 
     /*** 用户状态  0：禁用 1：正常  2：锁定 */
-    private UserStatusEnum userStatus;
+    private Integer userStatus;
 }

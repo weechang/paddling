@@ -13,6 +13,7 @@
         <module>paddling-admin</module>
         <module>paddling-demo</module>
         <module>paddling-oss</module>
+        <module>paddling-alibaba</module>
     </modules>
 
     <packaging>pom</packaging>

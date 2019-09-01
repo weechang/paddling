@@ -67,7 +67,7 @@ public class UserController extends PaddlingController {
     @PostMapping
     public R saveOrUpdate(User user) {
         if (user.getId() == null) {
-            user.setUserStatus(UserStatusEnum.AVAILABLE);
+            user.setUserStatus(UserStatusEnum.AVAILABLE.getValue());
         }
         userService.saveOrUpdate(user);
         return R.ok();
