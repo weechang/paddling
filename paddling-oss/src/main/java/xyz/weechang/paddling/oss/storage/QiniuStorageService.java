@@ -39,13 +39,14 @@ public class QiniuStorageService extends StorageService{
 
     @Override
     public String getUploadToken() {
+        this.token = Auth.create(qiniuProperties.getAccessKey(), qiniuProperties.getSecretKey()).uploadToken(qiniuProperties.getBucketName());
         return this.token;
     }
 
     @Override
     public String upload(byte[] data, String path) {
         try {
-            Response res = uploadManager.put(data, path, token);
+            Response res = uploadManager.put(data, path, getUploadToken());
             if (!res.isOK()) {
                 throw new RuntimeException("上传七牛出错：" + res.toString());
             }
